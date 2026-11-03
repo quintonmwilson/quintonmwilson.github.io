@@ -1,583 +1,359 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Quinton Wilson - Data Scientist</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quinton Wilson | Data Scientist</title>
+<meta name="description" content="Quinton Wilson, data scientist focused on healthcare and commercial analytics: predictive modeling, experimentation, and explainable machine learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1d2321;
+    --muted: #5d6662;
+    --line: #e4e2dc;
+    --accent: #0f6b5c;
+    --accent-soft: #e3f0ec;
+    --maxw: 880px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121615;
+      --surface: #1a201e;
+      --text: #e8ebe9;
+      --muted: #a2aba7;
+      --line: #2c3431;
+      --accent: #5cc4ae;
+      --accent-soft: #1d2f2a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .brand { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 19px; color: var(--text); }
+  .brand:hover { text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 24px; font-size: 15px; }
+  nav ul a { color: var(--muted); }
+  nav ul a:hover { color: var(--text); text-decoration: none; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+  /* Hero */
+  .hero { padding: 88px 0 64px; }
+  .eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  h1 {
+    font-family: "Fraunces", Georgia, serif; font-weight: 500;
+    font-size: clamp(36px, 6vw, 54px); line-height: 1.12; letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .lede { font-size: 19px; color: var(--muted); max-width: 640px; margin-bottom: 32px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 8px;
+    font-size: 15px; font-weight: 600; border: 1px solid var(--accent);
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { text-decoration: none; opacity: 0.9; }
+  .btn-ghost { color: var(--accent); }
+  .btn-ghost:hover { text-decoration: none; background: var(--accent-soft); }
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 300px;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px 30px;
-            z-index: 1000;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-        }
+  /* Sections */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: "Fraunces", Georgia, serif; font-weight: 500;
+    font-size: 28px; margin-bottom: 28px;
+  }
+  h3 { font-size: 18px; font-weight: 600; line-height: 1.4; }
 
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            font-size: 48px;
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
+  /* Projects */
+  .project {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 28px; margin-bottom: 20px;
+  }
+  .project.featured { border-left: 4px solid var(--accent); }
+  .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .status {
+    font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent); white-space: nowrap;
+  }
+  .project p { color: var(--muted); margin-bottom: 14px; }
+  .metrics { list-style: none; margin-bottom: 16px; }
+  .metrics li { padding-left: 18px; position: relative; margin-bottom: 4px; }
+  .metrics li::before { content: ""; position: absolute; left: 0; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .tag { font-size: 13px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); }
+  .links { display: flex; gap: 20px; font-size: 15px; font-weight: 500; }
 
-        header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+  /* Experience */
+  .role { display: grid; grid-template-columns: 180px 1fr; gap: 24px; margin-bottom: 32px; }
+  .role:last-child { margin-bottom: 0; }
+  .when { font-size: 14px; color: var(--muted); padding-top: 2px; }
+  .org { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
+  .role ul { padding-left: 18px; }
+  .role li { margin-bottom: 4px; }
 
-        .subtitle {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 32px; }
+  .skills h3 { font-size: 15px; margin-bottom: 4px; }
+  .skills p { color: var(--muted); font-size: 15px; }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
+  /* Education */
+  .creds { list-style: none; }
+  .creds li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .creds li:last-child { border-bottom: none; }
+  .creds span { color: var(--muted); font-size: 15px; white-space: nowrap; }
 
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
+  /* Contact */
+  .contact p { color: var(--muted); max-width: 600px; margin-bottom: 24px; }
+  footer { padding: 32px 0 48px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
 
-        .social-links a:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Main Content */
-        main {
-            margin-left: 300px;
-            padding: 40px;
-        }
-
-        section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 60px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        h2 {
-            font-size: 36px;
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .intro-text {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .project-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .project-card p {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .tech-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .project-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .project-link:hover {
-            color: #764ba2;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .skill-category {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .skill-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 32px;
-            margin: 0 auto 20px;
-        }
-
-        /* Contact Form */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid rgba(102, 126, 234, 0.1);
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .contact-info {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-            border-radius: 15px;
-            padding: 30px;
-            height: fit-content;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-right: 15px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                position: relative;
-                width: 100%;
-                height: auto;
-                padding: 20px;
-            }
-
-            main {
-                margin-left: 0;
-                padding: 20px;
-            }
-
-            section {
-                padding: 30px 20px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .avatar {
-                width: 80px;
-                height: 80px;
-                font-size: 32px;
-            }
-
-            header h1 {
-                font-size: 24px;
-            }
-
-            h2 {
-                font-size: 28px;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        section {
-            animation: fadeInUp 0.6s ease-out;
-        }
-    </style>
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .brand { font-size: 17px; }
+    nav ul { gap: 14px; font-size: 14px; margin-left: 16px; }
+    nav ul li.hide-sm { display: none; }
+    .hero { padding: 56px 0 44px; }
+    .lede { font-size: 17px; }
+    .project { padding: 22px; }
+    .role { grid-template-columns: 1fr; gap: 4px; }
+    .skills { grid-template-columns: 1fr; }
+    .creds li { flex-direction: column; gap: 2px; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="avatar">QW</div>
-        <h1>Quinton Wilson</h1>
-        <p class="subtitle">Data Scientist & Machine Learning Engineer<br/>
-        Transforming data into actionable insights through innovative analytics and predictive modeling.</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/WallStreetQ" target="_blank">📊</a>
-            <a href="https://www.linkedin.com/in/quintonmwilson/" target="_blank">💼</a>
-            <a href="mailto:wilsonq0629@gmail.com">✉️</a>
-        </div>
-    </header>
 
-    <main>
-<section id="about">
-    <h2>About Me</h2>
-    <p class="intro-text">
-        I'm a passionate data scientist with expertise in machine learning, predictive analytics, and financial modeling. I specialize in building robust ML pipelines that solve real-world problems, from fraud detection systems to environmental prediction models. My work combines statistical rigor with practical implementation to deliver measurable business impact.
-    </p>
-
-    <h2>Education & Certifications</h2>
-    <p>My academic background and certifications have equipped me with a strong foundation in both business acumen and advanced data science techniques:</p>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Quinton Wilson</a>
     <ul>
-        <li><strong>Master of Science in Applied Data Science</strong> from UNC Chapel Hill</li>
-        <li><strong>Bachelor of Science in Business Administration</strong> from Florida A&M University</li>
-        <li><strong>Business Intelligence Certification</strong> from Miami Dade College</li>
-        <li><strong>Azure Cloud Computing Certification</strong></li>
-        <li><strong>Alteryx Core Designer Certification</strong></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li class="hide-sm"><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-</section>
-            <a href="#projects" class="cta-button">View My Work</a>
-        </section>
+  </div>
+</nav>
 
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-icon">🛡️</div>
-                    <h3>Financial Fraud Detection</h3>
-                    <p>Advanced machine learning system for detecting fraudulent financial transactions using ensemble methods and anomaly detection algorithms. Achieved 95%+ accuracy with minimal false positives.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                        <span class="tech-tag">Pandas</span>
-                        <span class="tech-tag">XGBoost</span>
-                        <span class="tech-tag">Random Forest</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/WallStreetQ/financial-fraud-detection" target="_blank" class="project-link">🔗 View GitHub Code</a>
-                    </div>
-                </div>
+<main id="top">
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Data Scientist · Healthcare &amp; Commercial Analytics</p>
+      <h1>Predictive models and experiments that turn data into decisions.</h1>
+      <p class="lede">I'm a data scientist with 8 years of analytics experience across commercial marketing, distribution and regulated government data. I'm now applying predictive modeling, experimentation and explainable machine learning to healthcare, starting with clinical EHR data.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <!-- Upload your resume to the repo as resume.pdf so this link works -->
+        <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      </div>
+    </div>
+  </header>
 
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-icon">📊</div>
-                    <h3>SQL Server Adventure Works Analysis</h3>
-                    <p>Comprehensive business intelligence analysis of Microsoft's Adventure Works database. Deep dive into sales patterns, customer segmentation, and performance metrics using advanced SQL techniques.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">SQL Server</span>
-                        <span class="tech-tag">T-SQL</span>
-                        <span class="tech-tag">Business Intelligence</span>
-                        <span class="tech-tag">Data Analysis</span>
-                        <span class="tech-tag">Reporting</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://medium.com/@theinvestorq/microsoft-sql-server-adventure-works-2017-analysis-c95030a464ee" target="_blank" class="project-link">📖 Read Medium Article</a>
-                    </div>
-                </div>
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
 
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-icon">🌍</div>
-                    <h3>Air Quality Prediction Model</h3>
-                    <p>Comprehensive air quality prediction system using time series analysis and environmental data. Provides accurate AQI forecasts to help communities prepare for air quality changes.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">Time Series</span>
-                        <span class="tech-tag">LSTM</span>
-                        <span class="tech-tag">Data Visualization</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/WallStreetQ/aqi-prediction" target="_blank" class="project-link">🔗 View GitHub Code</a>
-                        <a href="https://medium.com/@theinvestorq/air-quality-prediction-using-scikit-learn-841bb9fa1081" target="_blank" class="project-link">📖 Read Medium Article</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <article class="project featured">
+        <div class="project-head">
+          <h3>Hospital Readmission Prediction (MIMIC-IV)</h3>
+          <span class="status">In progress</span>
+        </div>
+        <p>Predicting 30-day hospital readmission for adult inpatients using MIMIC-IV, a de-identified clinical database from Beth Israel Deaconess Medical Center. The goal is a model that shows care teams why a patient is at risk, not just a score.</p>
+        <ul class="metrics">
+          <li>Defining the adult inpatient cohort and 30-day readmission outcome from longitudinal EHR data: encounters, vitals, labs and ICD-10 diagnosis codes</li>
+          <li>Extraction and feature pipeline built in SQL on Google BigQuery, with exploratory analysis in Python</li>
+          <li>Next: XGBoost and Random Forest risk models with SHAP explainability to surface interpretable risk drivers</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">SQL</span><span class="tag">BigQuery</span><span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">EHR data</span>
+        </div>
+        <!-- Add a link here once the repository is public -->
+      </article>
 
-        <section id="skills">
-            <h2>Core Competencies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <div class="skill-icon">🤖</div>
-                    <h3>Machine Learning</h3>
-                    <p>Advanced modeling techniques, ensemble methods, deep learning, and MLOps pipeline development</p>
-                </div>
-                <div class="skill-category">
-                    <div class="skill-icon">📊</div>
-                    <h3>Data Analysis</h3>
-                    <p>Statistical analysis, data mining, exploratory data analysis, and predictive analytics</p>
-                </div>
-                <div class="skill-category">
-                    <div class="skill-icon">💻</div>
-                    <h3>Programming</h3>
-                    <p>Python, R, SQL, TensorFlow, PyTorch, Scikit-learn, and cloud computing platforms</p>
-                </div>
-                <div class="skill-category">
-                    <div class="skill-icon">📈</div>
-                    <h3>Visualization</h3>
-                    <p>Interactive dashboards, business intelligence, and data storytelling with modern tools</p>
-                </div>
-            </div>
-        </section>
+      <article class="project">
+        <div class="project-head">
+          <h3>Visitor Forecasting for Surf City, NC</h3>
+          <span class="status">Client project · UNC capstone</span>
+        </div>
+        <p>Surf City faces unpredictable tourism surges that strain staffing and public resources. As the machine learning developer on a four-person team working with Blue Nalu Analytics, I helped replace the city's SARIMA model with daily visitor forecasts that emergency managers can use to staff ahead of surges.</p>
+        <ul class="metrics">
+          <li>XGBoost model explained 94% of variance in daily out-of-market visitors (R² = 0.936), with 10.5% MAPE and RMSE of about 3,300 visitors</li>
+          <li>Benchmarked XGBoost and Random Forest against a transparent weighted year-over-year growth baseline, so stakeholders could see what each model added</li>
+          <li>Engineered 25+ features from five years of daily foot traffic, event, weather and market data: lags chosen by ACF, PACF and AIC analysis, 7-day rolling averages, cyclical date encodings and holiday flags</li>
+          <li>Found that recent visitor history and seasonality drive predictions, while weather contributes little, which makes the forecasts stable enough for operational planning</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Statsmodels</span><span class="tag">Time series</span><span class="tag">Feature engineering</span>
+        </div>
+      </article>
 
-        <section id="contact">
-            <h2>Let's Connect</h2>
-            <div class="contact-grid">
-                <div>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="6" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="cta-button">Send Message</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <strong>Email</strong><br>
-                            wilsonq0629@gmail.com
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">💼</div>
-                        <div>
-                            <strong>LinkedIn</strong><br>
-                            /in/quintonmwilson
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📊</div>
-                        <div>
-                            <strong>GitHub</strong><br>
-                            github.com/WallStreetQ
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+      <article class="project">
+        <div class="project-head">
+          <h3>Financial Fraud Detection</h3>
+          <span class="status">Team project</span>
+        </div>
+        <p>With two classmates, compared XGBoost, Random Forest and a neural network for detecting fraud in highly imbalanced transaction data, aiming to raise recall without driving up false positives.</p>
+        <ul class="metrics">
+          <li>Tested SMOTE oversampling, undersampling, cost-sensitive learning and decision-threshold tuning against baseline models</li>
+          <li>XGBoost delivered the best fraud-class F1 (0.87) and ROC-AUC of 0.998</li>
+          <li>XGBoost trained roughly 100x faster than the neural network (4s vs. 415s)</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">TensorFlow</span><span class="tag">SMOTE</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/WallStreetQ/financial-fraud-detection" target="_blank" rel="noopener">Code, report and slides on GitHub →</a>
+        </div>
+      </article>
 
-    <script>
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+      <article class="project">
+        <div class="project-head">
+          <h3>Air Quality Index Prediction</h3>
+        </div>
+        <p>A Random Forest regression model predicting Air Quality Index values for environmental monitoring and public health assessment.</p>
+        <ul class="metrics">
+          <li>Test R² of 0.989, with a mean cross-validated R² of 0.988</li>
+          <li>Residual analysis showed the model is strongest at moderate-to-high pollution (AQI 150–200) and more variable at low AQI, traced to a bimodal training distribution</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Scikit-Learn</span><span class="tag">Random Forest</span><span class="tag">Cross-validation</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/WallStreetQ/aqi-prediction" target="_blank" rel="noopener">Code on GitHub →</a>
+          <a href="https://medium.com/@theinvestorq/air-quality-prediction-using-scikit-learn-841bb9fa1081" target="_blank" rel="noopener">Write-up on Medium →</a>
+        </div>
+      </article>
+    </div>
+  </section>
 
-        // Form submission handler
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            this.reset();
-        });
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
 
-        // Add scroll effect to project cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      <div class="role">
+        <div class="when">Feb 2026 – Present</div>
+        <div>
+          <h3>Data Scientist</h3>
+          <p class="org">Covetrus (animal health technology) · Remote</p>
+          <ul>
+            <li>Built a regression forecasting and quadratic optimization model for marketing spend across 4 audience segments, cutting planning time ~30% with forecasts within ~5% of budget.</li>
+            <li>Run A/B and multivariate experiments and segmentation for campaigns reaching ~15M consumers per send, supporting ~$4.5M in monthly gross profit.</li>
+            <li>Refactored legacy SQL segmentation logic for ~25% faster runtime and delivered a migration recommendation to leadership.</li>
+          </ul>
+        </div>
+      </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+      <div class="role">
+        <div class="when">Nov 2021 – Feb 2026</div>
+        <div>
+          <h3>Data Analyst</h3>
+          <p class="org">Southern Glazer's Wine &amp; Spirits · Miramar, FL</p>
+          <ul>
+            <li>Built Python demand forecasting models (~12% MAPE) to optimize inventory across 12 distribution centers.</li>
+            <li>Partnered with sales and operations leaders on recommendations that drove $2.3M in cost savings; automated dashboards saved 35 reporting hours per month.</li>
+          </ul>
+        </div>
+      </div>
 
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-    </script>
+      <div class="role">
+        <div class="when">Aug 2018 – Aug 2021</div>
+        <div>
+          <h3>Senior Operations Analyst</h3>
+          <p class="org">Florida Department of Revenue · Tallahassee, FL</p>
+          <ul>
+            <li>Applied statistical anomaly detection to 100M+ regulated records, identifying $4.2M in revenue recovery opportunities.</li>
+            <li>Built regression forecasts of quarterly tax revenue within 3% accuracy, supporting $850M in annual budget planning.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Machine learning &amp; statistics</h3>
+          <p>Classification, regression, forecasting, optimization, imbalanced data (SMOTE), explainable ML (SHAP), A/B and multivariate testing</p>
+        </div>
+        <div>
+          <h3>Programming</h3>
+          <p>Python (Pandas, NumPy, Scikit-Learn, XGBoost, TensorFlow, PyTorch), advanced SQL</p>
+        </div>
+        <div>
+          <h3>Data platforms</h3>
+          <p>Snowflake, Google BigQuery, Azure, ETL and data validation</p>
+        </div>
+        <div>
+          <h3>Visualization</h3>
+          <p>Tableau, Power BI, Alteryx, executive dashboards</p>
+        </div>
+        <div>
+          <h3>Healthcare data</h3>
+          <p>EHR analytics (MIMIC-IV), cohort and outcome definition, ICD-10 codes, HIPAA privacy training</p>
+        </div>
+        <div>
+          <h3>NLP &amp; deep learning</h3>
+          <p>Graduate coursework with Hugging Face Transformers and GPT models</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <h2>Education &amp; Certifications</h2>
+      <ul class="creds">
+        <li>M.S., Applied Data Science, University of North Carolina at Chapel Hill <span>2025</span></li>
+        <li>B.S., Business Administration, Florida A&amp;M University <span>2017</span></li>
+        <li>CITI Program, Human Subjects Research incl. HIPAA Privacy Protections <span>2025</span></li>
+        <li>Alteryx Designer Core Certification <span>2023</span></li>
+        <li>Microsoft Azure Fundamentals (AZ-900) <span>2023</span></li>
+        <li>Business Intelligence Certification, Miami Dade College <span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p>I'm interested in data science roles in healthcare, especially predictive modeling, patient engagement and outcomes analytics. The fastest way to reach me is email.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:wilsonq0629@gmail.com">wilsonq0629@gmail.com</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/quintonmwilson/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/WallStreetQ" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Quinton Wilson</div>
+</footer>
+
 </body>
 </html>
