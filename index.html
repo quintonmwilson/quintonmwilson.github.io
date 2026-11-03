@@ -7,137 +7,183 @@
 <meta name="description" content="Quinton Wilson, data scientist focused on healthcare and commercial analytics: predictive modeling, experimentation, and explainable machine learning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fbfaf7;
-    --surface: #ffffff;
-    --text: #1d2321;
-    --muted: #5d6662;
-    --line: #e4e2dc;
-    --accent: #0f6b5c;
-    --accent-soft: #e3f0ec;
-    --maxw: 880px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #121615;
-      --surface: #1a201e;
-      --text: #e8ebe9;
-      --muted: #a2aba7;
-      --line: #2c3431;
-      --accent: #5cc4ae;
-      --accent-soft: #1d2f2a;
-    }
+    --bg: #0b0f0e;
+    --bg-2: #111716;
+    --surface: #131a19;
+    --text: #e6ece9;
+    --muted: #8f9c97;
+    --dim: #5d6a65;
+    --line: #22302c;
+    --accent: #3fd8b0;
+    --accent-dim: rgba(63, 216, 176, 0.12);
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --maxw: 920px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: var(--bg);
+    font-family: var(--sans);
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+    background-attachment: fixed;
     color: var(--text);
     line-height: 1.65;
-    font-size: 17px;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    counter-reset: sec;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+    background: radial-gradient(ellipse at 50% 0%, transparent 0%, var(--bg) 70%);
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  ::selection { background: var(--accent); color: var(--bg); }
 
   /* Nav */
   nav {
     position: sticky; top: 0; z-index: 10;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
+    background: rgba(11, 15, 14, 0.85);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
   }
-  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
-  .brand { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 19px; color: var(--text); }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+  .brand { font-family: var(--mono); font-weight: 600; font-size: 15px; color: var(--text); }
+  .brand span { color: var(--accent); }
   .brand:hover { text-decoration: none; }
-  nav ul { list-style: none; display: flex; gap: 24px; font-size: 15px; }
+  nav ul { list-style: none; display: flex; gap: 22px; font-family: var(--mono); font-size: 13px; }
   nav ul a { color: var(--muted); }
-  nav ul a:hover { color: var(--text); text-decoration: none; }
+  nav ul a::before { content: "/"; color: var(--dim); margin-right: 2px; }
+  nav ul a:hover { color: var(--accent); text-decoration: none; }
 
   /* Hero */
-  .hero { padding: 88px 0 64px; }
+  .hero { padding: 96px 0 72px; }
   .eyebrow {
-    font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 16px;
+    font-family: var(--mono); font-size: 13px; color: var(--accent); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
   }
+  .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
   h1 {
-    font-family: "Fraunces", Georgia, serif; font-weight: 500;
-    font-size: clamp(36px, 6vw, 54px); line-height: 1.12; letter-spacing: -0.01em;
-    margin-bottom: 20px;
+    font-family: var(--sans); font-weight: 600;
+    font-size: clamp(34px, 5.6vw, 52px); line-height: 1.1; letter-spacing: -0.025em;
+    margin-bottom: 22px; max-width: 760px;
   }
-  .lede { font-size: 19px; color: var(--muted); max-width: 640px; margin-bottom: 32px; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lede { font-size: 18px; color: var(--muted); max-width: 640px; margin-bottom: 32px; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .btn {
-    display: inline-block; padding: 11px 20px; border-radius: 8px;
-    font-size: 15px; font-weight: 600; border: 1px solid var(--accent);
+    display: inline-block; padding: 10px 18px; border-radius: 6px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600; border: 1px solid var(--accent);
   }
   .btn-primary { background: var(--accent); color: var(--bg); }
-  .btn-primary:hover { text-decoration: none; opacity: 0.9; }
-  .btn-ghost { color: var(--accent); }
-  .btn-ghost:hover { text-decoration: none; background: var(--accent-soft); }
+  .btn-primary:hover { text-decoration: none; box-shadow: 0 0 20px rgba(63, 216, 176, 0.35); }
+  .btn-ghost { color: var(--accent); background: transparent; }
+  .btn-ghost:hover { text-decoration: none; background: var(--accent-dim); }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg-2); overflow: hidden;
+  }
+  .stat { padding: 18px 20px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat b { display: block; font-family: var(--mono); font-size: 22px; font-weight: 600; color: var(--text); }
+  .stat span { font-size: 13px; color: var(--muted); }
 
   /* Sections */
-  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  section { padding: 64px 0; border-top: 1px solid var(--line); background: rgba(11, 15, 14, 0.6); }
   h2 {
-    font-family: "Fraunces", Georgia, serif; font-weight: 500;
-    font-size: 28px; margin-bottom: 28px;
+    font-family: var(--sans); font-weight: 600; font-size: 26px; letter-spacing: -0.015em;
+    margin-bottom: 32px; display: flex; align-items: baseline; gap: 14px;
   }
-  h3 { font-size: 18px; font-weight: 600; line-height: 1.4; }
+  h2::before {
+    counter-increment: sec; content: counter(sec, decimal-leading-zero);
+    font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent);
+  }
+  h3 { font-size: 17px; font-weight: 600; line-height: 1.4; }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 1fr 260px; gap: 40px; }
+  .about p { color: var(--muted); margin-bottom: 16px; }
+  .about p strong { color: var(--text); font-weight: 600; }
+  .facts {
+    font-family: var(--mono); font-size: 13px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; align-self: start;
+  }
+  .facts div { padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  .facts div:last-child { border-bottom: none; }
+  .facts dt { color: var(--dim); }
+  .facts dd { color: var(--text); }
 
   /* Projects */
   .project {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-    padding: 28px; margin-bottom: 20px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 26px 28px; margin-bottom: 18px; transition: border-color 0.2s ease;
   }
-  .project.featured { border-left: 4px solid var(--accent); }
+  .project:hover { border-color: #33463f; }
+  .project.featured { border-color: rgba(63, 216, 176, 0.45); box-shadow: inset 3px 0 0 var(--accent); }
   .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
   .status {
-    font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
-    background: var(--accent-soft); color: var(--accent); white-space: nowrap;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 4px;
+    background: var(--accent-dim); color: var(--accent); white-space: nowrap; text-transform: lowercase;
   }
   .project p { color: var(--muted); margin-bottom: 14px; }
-  .metrics { list-style: none; margin-bottom: 16px; }
-  .metrics li { padding-left: 18px; position: relative; margin-bottom: 4px; }
-  .metrics li::before { content: ""; position: absolute; left: 0; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-  .tag { font-size: 13px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); }
-  .links { display: flex; gap: 20px; font-size: 15px; font-weight: 500; }
+  .metrics { list-style: none; margin-bottom: 18px; }
+  .metrics li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 15px; }
+  .metrics li::before { content: "›"; position: absolute; left: 2px; top: 0; color: var(--accent); font-family: var(--mono); font-weight: 600; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .tag {
+    font-family: var(--mono); font-size: 12px; padding: 2px 8px; border-radius: 4px;
+    border: 1px solid var(--line); color: var(--muted); background: var(--bg-2);
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 20px; font-family: var(--mono); font-size: 13px; }
 
   /* Experience */
-  .role { display: grid; grid-template-columns: 180px 1fr; gap: 24px; margin-bottom: 32px; }
-  .role:last-child { margin-bottom: 0; }
-  .when { font-size: 14px; color: var(--muted); padding-top: 2px; }
-  .org { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
-  .role ul { padding-left: 18px; }
-  .role li { margin-bottom: 4px; }
+  .role { display: grid; grid-template-columns: 170px 1fr; gap: 24px; padding-bottom: 28px; margin-bottom: 28px; border-bottom: 1px dashed var(--line); }
+  .role:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .when { font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 3px; }
+  .org { color: var(--accent); font-size: 14px; margin-bottom: 10px; font-family: var(--mono); }
+  .role ul { list-style: none; }
+  .role li { padding-left: 20px; position: relative; margin-bottom: 6px; color: var(--muted); font-size: 15px; }
+  .role li::before { content: "›"; position: absolute; left: 2px; color: var(--dim); font-family: var(--mono); }
 
   /* Skills */
-  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 32px; }
-  .skills h3 { font-size: 15px; margin-bottom: 4px; }
-  .skills p { color: var(--muted); font-size: 15px; }
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .skills > div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; }
+  .skills h3 { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+  .skills p { color: var(--muted); font-size: 14px; }
 
   /* Education */
-  .creds { list-style: none; }
-  .creds li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .creds { list-style: none; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  .creds li { display: flex; justify-content: space-between; gap: 16px; padding: 13px 18px; border-bottom: 1px solid var(--line); font-size: 15px; }
   .creds li:last-child { border-bottom: none; }
-  .creds span { color: var(--muted); font-size: 15px; white-space: nowrap; }
+  .creds span { font-family: var(--mono); color: var(--dim); font-size: 13px; white-space: nowrap; }
 
   /* Contact */
   .contact p { color: var(--muted); max-width: 600px; margin-bottom: 24px; }
-  footer { padding: 32px 0 48px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
+  footer { padding: 28px 0 44px; font-family: var(--mono); font-size: 12px; color: var(--dim); border-top: 1px solid var(--line); background: var(--bg); }
 
+  @media (max-width: 720px) {
+    .about { grid-template-columns: 1fr; gap: 24px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  }
   @media (max-width: 640px) {
-    body { font-size: 16px; }
-    .brand { font-size: 17px; }
-    nav ul { gap: 14px; font-size: 14px; margin-left: 16px; }
+    .brand { font-size: 14px; }
+    nav ul { gap: 12px; font-size: 12px; margin-left: 12px; }
     nav ul li.hide-sm { display: none; }
-    .hero { padding: 56px 0 44px; }
-    .lede { font-size: 17px; }
-    .project { padding: 22px; }
+    .hero { padding: 60px 0 48px; }
+    .lede { font-size: 16px; }
+    .project { padding: 20px; }
     .role { grid-template-columns: 1fr; gap: 4px; }
     .skills { grid-template-columns: 1fr; }
     .creds li { flex-direction: column; gap: 2px; }
@@ -148,12 +194,13 @@
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top">Quinton Wilson</a>
+    <a class="brand" href="#top">quinton<span>.</span>wilson</a>
     <ul>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li class="hide-sm"><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li class="hide-sm"><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li class="hide-sm"><a href="#skills">skills</a></li>
+      <li><a href="#contact">contact</a></li>
     </ul>
   </div>
 </nav>
@@ -162,15 +209,41 @@
   <header class="hero">
     <div class="wrap">
       <p class="eyebrow">Data Scientist · Healthcare &amp; Commercial Analytics</p>
-      <h1>Predictive models and experiments that turn data into decisions.</h1>
+      <h1>Predictive models and experiments that turn data into <em>decisions</em>.</h1>
       <p class="lede">I'm a data scientist with 8 years of analytics experience across commercial marketing, distribution and regulated government data. I'm now applying predictive modeling, experimentation and explainable machine learning to healthcare, starting with clinical EHR data.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#projects">View projects</a>
         <!-- Upload your resume to the repo as resume.pdf so this link works -->
         <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
       </div>
+      <div class="stats">
+        <div class="stat"><b>8 yrs</b><span>analytics experience</span></div>
+        <div class="stat"><b>100M+</b><span>records modeled</span></div>
+        <div class="stat"><b>15M</b><span>consumers per campaign</span></div>
+        <div class="stat"><b>R² 0.94</b><span>visitor forecast accuracy</span></div>
+      </div>
     </div>
   </header>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <div class="about">
+        <div>
+          <p>I started in operations analytics at the <strong>Florida Department of Revenue</strong>, working with more than 100 million regulated records where accuracy wasn't optional. My forecasts fed an $850M state budget. At <strong>Southern Glazer's</strong>, I moved into demand forecasting and analytics that sales and operations leaders used to make decisions.</p>
+          <p>After earning my M.S. in Applied Data Science from <strong>UNC Chapel Hill</strong>, I joined <strong>Covetrus</strong> as a data scientist. There I run experiments and optimization models for campaigns that reach about 15 million consumers.</p>
+          <p>Now I'm bringing that toolkit to <strong>healthcare</strong>. The core questions are ones I already work on every day: who is most likely to benefit from an intervention, did the intervention work, and how do you explain a model to the people acting on it. My MIMIC-IV readmission project is where I'm applying that to clinical data.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>role</dt><dd>Data Scientist, Covetrus</dd></div>
+          <div><dt>focus</dt><dd>Healthcare data science</dd></div>
+          <div><dt>education</dt><dd>M.S. Applied Data Science, UNC</dd></div>
+          <div><dt>based</dt><dd>South Florida · remote</dd></div>
+          <div><dt>stack</dt><dd>Python · SQL · BigQuery · Snowflake</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
 
   <section id="projects">
     <div class="wrap">
